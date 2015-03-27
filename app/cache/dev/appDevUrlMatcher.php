@@ -127,6 +127,71 @@ class appDevUrlMatcher extends Symfony\Bundle\FrameworkBundle\Routing\Redirectab
 
         }
 
+        if (0 === strpos($pathinfo, '/todo')) {
+            // todo
+            if (rtrim($pathinfo, '/') === '/todo') {
+                if (substr($pathinfo, -1) !== '/') {
+                    return $this->redirect($pathinfo.'/', 'todo');
+                }
+
+                return array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::indexAction',  '_route' => 'todo',);
+            }
+
+            // todo_show
+            if (preg_match('#^/todo/(?P<id>[^/]++)/show$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'todo_show')), array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::showAction',));
+            }
+
+            // todo_new
+            if ($pathinfo === '/todo/new') {
+                return array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::newAction',  '_route' => 'todo_new',);
+            }
+
+            // todo_create
+            if ($pathinfo === '/todo/create') {
+                if ($this->context->getMethod() != 'POST') {
+                    $allow[] = 'POST';
+                    goto not_todo_create;
+                }
+
+                return array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::createAction',  '_route' => 'todo_create',);
+            }
+            not_todo_create:
+
+            // todo_edit
+            if (preg_match('#^/todo/(?P<id>[^/]++)/edit$#s', $pathinfo, $matches)) {
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'todo_edit')), array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::editAction',));
+            }
+
+            // todo_update
+            if (preg_match('#^/todo/(?P<id>[^/]++)/update$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'PUT'))) {
+                    $allow = array_merge($allow, array('POST', 'PUT'));
+                    goto not_todo_update;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'todo_update')), array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::updateAction',));
+            }
+            not_todo_update:
+
+            // todo_delete
+            if (preg_match('#^/todo/(?P<id>[^/]++)/delete$#s', $pathinfo, $matches)) {
+                if (!in_array($this->context->getMethod(), array('POST', 'DELETE'))) {
+                    $allow = array_merge($allow, array('POST', 'DELETE'));
+                    goto not_todo_delete;
+                }
+
+                return $this->mergeDefaults(array_replace($matches, array('_route' => 'todo_delete')), array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\TodoController::deleteAction',));
+            }
+            not_todo_delete:
+
+        }
+
+        // pillaerds_todo_homepage
+        if (0 === strpos($pathinfo, '/hello') && preg_match('#^/hello/(?P<name>[^/]++)$#s', $pathinfo, $matches)) {
+            return $this->mergeDefaults(array_replace($matches, array('_route' => 'pillaerds_todo_homepage')), array (  '_controller' => 'Pillaerds\\TodoBundle\\Controller\\DefaultController::indexAction',));
+        }
+
         // homepage
         if ($pathinfo === '/app/example') {
             return array (  '_controller' => 'AppBundle\\Controller\\DefaultController::indexAction',  '_route' => 'homepage',);

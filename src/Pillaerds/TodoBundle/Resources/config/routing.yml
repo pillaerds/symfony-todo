@@ -1,3 +1,7 @@
+pillaerds_todo_todo:
+    resource: "@PillaerdsTodoBundle/Resources/config/routing/todo.yml"
+    prefix:   /todo
+
 pillaerds_todo_homepage:
     path:     /hello/{name}
     defaults: { _controller: PillaerdsTodoBundle:Default:index }

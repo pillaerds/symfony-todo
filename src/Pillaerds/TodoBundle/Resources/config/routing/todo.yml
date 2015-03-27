@@ -1,0 +1,30 @@
+todo:
+    path:     /
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:index" }
+
+todo_show:
+    path:     /{id}/show
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:show" }
+
+todo_new:
+    path:     /new
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:new" }
+
+todo_create:
+    path:     /create
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:create" }
+    methods:  POST
+
+todo_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:edit" }
+
+todo_update:
+    path:     /{id}/update
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:update" }
+    methods:  [POST, PUT]
+
+todo_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PillaerdsTodoBundle:Todo:delete" }
+    methods:  [POST, DELETE]

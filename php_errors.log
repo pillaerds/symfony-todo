@@ -1,0 +1,12 @@
+[24-Mar-2015 20:43:16 Europe/Amsterdam] PHP Fatal error:  Class 'Event' not found in /Users/jan/dev/symfony-todo/play.php on line 27
+[24-Mar-2015 20:46:01 Europe/Amsterdam] PHP Fatal error:  Class 'Todo_item' not found in /Users/jan/dev/symfony-todo/play.php on line 27
+[24-Mar-2015 20:46:31 Europe/Amsterdam] PHP Fatal error:  Class 'Todo' not found in /Users/jan/dev/symfony-todo/play.php on line 27
+[24-Mar-2015 20:51:57 Europe/Amsterdam] PHP Fatal error:  Call to undefined method Pillaerds\TodoBundle\Entity\Todo::setTime() in /Users/jan/dev/symfony-todo/play.php on line 29
+[24-Mar-2015 20:53:04 Europe/Amsterdam] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'completed' cannot be null' in /Users/jan/dev/symfony-todo/vendor/doctrine/dbal/lib/Doctrine/DBAL/Statement.php:165
+Stack trace:
+#0 /Users/jan/dev/symfony-todo/vendor/doctrine/dbal/lib/Doctrine/DBAL/Statement.php(165): PDOStatement->execute(NULL)
+#1 /Users/jan/dev/symfony-todo/vendor/doctrine/orm/lib/Doctrine/ORM/Persisters/BasicEntityPersister.php(279): Doctrine\DBAL\Statement->execute()
+#2 /Users/jan/dev/symfony-todo/vendor/doctrine/orm/lib/Doctrine/ORM/UnitOfWork.php(966): Doctrine\ORM\Persisters\BasicEntityPersister->executeInserts()
+#3 /Users/jan/dev/symfony-todo/vendor/doctrine/orm/lib/Doctrine/ORM/UnitOfWork.php(335): Doctrine\ORM\UnitOfWork->executeInserts(Object(Doctrine\ORM\Mapping\ClassMetadata))
+#4 /Users/jan/dev/symfony-todo/vendor/doctrine/orm/lib/Doctrine/ORM/EntityManager.php(340): Doctrine\ORM\UnitOfWork->commit(NULL)
+#5 /Users/jan/dev/symfony-todo/play.php(33): Doctrine\ORM\EntityMana in /Users/jan/dev/symfony-todo/vendor/doctrine/dbal/lib/Doctrine/DBAL/DBALException.php on line 91
